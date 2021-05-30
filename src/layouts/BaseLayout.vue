@@ -1,6 +1,9 @@
 <template>
   <div class="app-main-layout">
-    <navbar @toggleSidebar="sidebarVisibility = !sidebarVisibility"></navbar>
+    <navbar
+      @toggleSidebar="sidebarVisibility = !sidebarVisibility"
+      @logout="login = false"
+    ></navbar>
 
     <sidebar v-model:isOpen="sidebarVisibility"></sidebar>
 
@@ -28,6 +31,7 @@ export default defineComponent({
   data() {
     return {
       sidebarVisibility: true,
+      login: true,
     };
   },
 });
