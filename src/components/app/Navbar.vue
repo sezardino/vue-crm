@@ -78,7 +78,7 @@ export default defineComponent({
         minute: "2-digit",
         second: "2-digit",
       };
-      return new Intl.DateTimeFormat("en-Pl", options).format(this.date);
+      return new Intl.DateTimeFormat("pl-Pl", options).format(this.date);
     },
   },
 });
