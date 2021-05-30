@@ -75,6 +75,7 @@
 </template>
 
 <script lang="ts">
+import messages from "@/utils/messages";
 import { defineComponent } from "vue";
 import formMixin from "../mixins/form";
 
@@ -84,15 +85,21 @@ export default defineComponent({
     return { formData: {} };
   },
   methods: {
-    submitHandler(evt: Event) {
+    async submitHandler(evt: Event) {
       const isValid = this.checkValid(evt.target);
 
       if (!isValid) {
         return;
       }
 
-      console.log(this.formData);
-      this.formData = {};
+      try {
+        await this.$store.dispatch("register", this.formData);
+        this.formData = {};
+        this.$router.push("/");
+      } catch (error) {
+        console.log(error);
+        // this.$error(messages[error.code] || "Some Error");
+      }
     },
   },
 });

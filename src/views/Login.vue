@@ -46,6 +46,7 @@
 </template>
 
 <script lang="ts">
+import messages from "@/utils/messages";
 import { defineComponent } from "vue";
 import formMixin from "../mixins/form";
 
@@ -58,16 +59,21 @@ export default defineComponent({
     };
   },
   methods: {
-    submitHandler(evt: Event) {
+    async submitHandler(evt: Event) {
       const isValid = this.checkValid(evt.target);
 
       if (!isValid) {
         return;
       }
 
-      console.log(this.formData);
-      this.$router.push("/");
-      this.formData = {};
+      try {
+        await this.$store.dispatch("login", this.formData);
+        this.$router.push("/");
+        this.formData = {};
+      } catch (error) {
+        console.log(error);
+        // this.$error(messages[error.code] || "Some Error");
+      }
     },
   },
 });

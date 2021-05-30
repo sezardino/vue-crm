@@ -28,7 +28,7 @@
             </li>
             <li class="divider" tabindex="-1"></li>
             <li>
-              <a href="#" class="black-text" @click="$emit('logout')">
+              <a href="#" class="black-text" @click="logoutHandler">
                 <i class="material-icons">assignment_return</i>Logout
               </a>
             </li>
@@ -44,7 +44,7 @@ import { defineComponent } from "vue";
 import { Dropdown } from "materialize-css/dist/js/materialize.min";
 
 export default defineComponent({
-  emits: ["toggleSidebar", "logout"],
+  emits: ["toggleSidebar"],
   data() {
     return {
       date: new Date(),
@@ -79,6 +79,12 @@ export default defineComponent({
         second: "2-digit",
       };
       return new Intl.DateTimeFormat("pl-Pl", options).format(this.date);
+    },
+  },
+  methods: {
+    async logoutHandler() {
+      await this.$store.dispatch("logout");
+      this.$router.push("/login?message=logout");
     },
   },
 });
