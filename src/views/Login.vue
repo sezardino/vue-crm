@@ -66,6 +66,7 @@ export default defineComponent({
       }
 
       console.log(this.formData);
+      this.$router.push("/");
       this.formData = {};
     },
   },
