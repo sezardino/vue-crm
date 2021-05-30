@@ -6,7 +6,8 @@
         <input
           id="email"
           type="text"
-          v-model.trim="email"
+          name="email"
+          v-model.trim="formData.email"
           :class="{ invalid: validate.email }"
         />
         <label for="email">Email</label>
@@ -18,7 +19,8 @@
         <input
           id="password"
           type="password"
-          v-model.trim="password"
+          name="password"
+          v-model.trim="formData.password"
           :class="{ invalid: validate.password }"
         />
         <label for="password">Pasword</label>
@@ -45,50 +47,26 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import formMixin from "../mixins/form";
+
 export default defineComponent({
   name: "Login",
+  mixins: [formMixin],
   data() {
     return {
-      email: "",
-      password: "",
-      validate: { email: "", password: "" },
+      formData: {},
     };
   },
   methods: {
-    submitHandler() {
-      if (!this.isValid()) {
+    submitHandler(evt: Event) {
+      const isValid = this.checkValid(evt.target);
+
+      if (!isValid) {
         return;
       }
 
-      const formData = {
-        email: this.email,
-        password: this.password,
-      };
-      console.log(formData);
-
-      this.email = "";
-      this.password = "";
-    },
-    isValid() {
-      let isValid = true;
-      const emailReg =
-        /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/;
-      this.validate.email = "";
-      this.validate.password = "";
-      if (this.email.length === 0) {
-        this.validate.email = "You should enter your email";
-        isValid = false;
-      } else if (!emailReg.test(this.email)) {
-        this.validate.email = "You should enter valid email";
-      }
-      if (this.password.length === 0) {
-        this.validate.password = "You should enter your password";
-        isValid = false;
-      } else if (this.password.length < 6) {
-        this.validate.password = "Password is too short";
-        isValid = false;
-      }
-      return isValid;
+      console.log(this.formData);
+      this.formData = {};
     },
   },
 });
