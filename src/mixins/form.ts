@@ -43,6 +43,8 @@ export default {
       if (!nameReg.test(value)) {
         isValid = false;
         this.validate.name = "Invalid Name";
+      } else if (value.length < 3) {
+        this.validate.name = "Name is too short";
       }
       return isValid;
     },
