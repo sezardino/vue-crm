@@ -4,6 +4,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import messages from "./utils/messages";
 import BaseLayout from "./layouts/BaseLayout.vue";
 import AuthLayout from "./layouts/AuthLayout.vue";
 
@@ -16,6 +17,13 @@ export default defineComponent({
     layout() {
       return this.$route.meta.layout + "-layout";
     },
+  },
+  mounted() {
+    const message = this.$route.query.message;
+
+    if (message) {
+      this.$message(messages[message]);
+    }
   },
 });
 </script>
