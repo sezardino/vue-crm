@@ -17,9 +17,12 @@ export default {
       if (value.length === 0) {
         this.validate.email = "You should enter your email";
         isValid = false;
-      } else if (!emailReg.test(value)) {
-        this.validate.email = "You should enter valid email";
       }
+      if (!emailReg.test(value)) {
+        this.validate.email = "You should enter valid email";
+        isValid = false;
+      }
+
       return isValid;
     },
 
