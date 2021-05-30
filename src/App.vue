@@ -1,7 +1,21 @@
 <template>
-  <div id="nav"><button class="btn">111</button>
-  </div>
-  <router-view />
+  <component :is="layout"> </component>
 </template>
 
-<style lang="scss"></style>
+<script lang="ts">
+import { defineComponent } from "vue";
+import BaseLayout from "./layouts/BaseLayout.vue";
+import AuthLayout from "./layouts/AuthLayout.vue";
+
+export default defineComponent({
+  components: { BaseLayout, AuthLayout },
+  data() {
+    return {};
+  },
+  computed: {
+    layout() {
+      return this.$route.meta.layout + "-layout";
+    },
+  },
+});
+</script>
