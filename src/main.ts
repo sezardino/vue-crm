@@ -7,6 +7,7 @@ import "materialize-css/dist/css/materialize.min.css";
 import "materialize-css/dist/js/materialize.min";
 import "./assets/index.css";
 import messagePlugin from "./utils/message";
+import Loader from "./components/app/Loader.vue";
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -27,6 +28,7 @@ let app;
 firebase.auth().onAuthStateChanged(() => {
   if (!app) {
     app = createApp(App);
+    app.component("Loader", Loader);
     app.use(store);
     app.use(router);
     app.use(messagePlugin);
