@@ -30,6 +30,12 @@ export default defineComponent({
       sidebarVisibility: true,
     };
   },
+  async mounted() {
+    if (!Object.keys(this.$store.getters.info).length) {
+      await this.$store.dispatch("fetchData");
+      console.log(this.$store.getters.info);
+    }
+  },
   methods: {},
 });
 </script>

@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
 import auth from "./auth";
+import info from "./info";
 
 export default createStore({
   state: {
@@ -18,6 +19,10 @@ export default createStore({
       return state.error;
     },
   },
-  actions: {},
-  modules: { auth },
+  actions: {
+    fetchCurrency() {
+      const key = process.env.VUE_APP_FIXER;
+    },
+  },
+  modules: { auth, info },
 });
