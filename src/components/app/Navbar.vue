@@ -16,7 +16,7 @@
             data-target="dropdown"
             ref="dropdown"
           >
-            USER NAME
+            {{ name }}
             <i class="material-icons right">arrow_drop_down</i>
           </a>
 
@@ -79,6 +79,9 @@ export default defineComponent({
         second: "2-digit",
       };
       return new Intl.DateTimeFormat("pl-Pl", options).format(this.date);
+    },
+    name() {
+      return this.$store.getters.info.name;
     },
   },
   methods: {
