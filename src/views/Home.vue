@@ -3,7 +3,7 @@
     <div class="page-title">
       <h3>Score</h3>
 
-      <button class="btn waves-effect waves-light btn-small">
+      <button class="btn waves-effect waves-light btn-small" @click="refresh">
         <i class="material-icons">refresh</i>
       </button>
     </div>
@@ -11,10 +11,10 @@
     <Loader v-if="loading" />
 
     <div v-else class="row">
-      <HomeBill />
+      <HomeBill :rates="currency" />
 
       <div class="col s12 m6 l8">
-        <HomeCurrency />
+        <HomeCurrency :rates="currency.rates" :date="currency.date" />
       </div>
     </div>
   </div>
@@ -34,8 +34,21 @@ export default defineComponent({
     };
   },
   async mounted() {
-    await this.$store.dispatch("fetchCurrency");
-    this.loading = false;
+    // this.currency = await this.$store.dispatch("fetchCurrency");
+    setTimeout(() => {
+      this.currency = { USD: 1.21995, PLN: 4.483998, EUR: 1 };
+      this.loading = false;
+    }, 500);
+  },
+  methods: {
+    async refresh() {
+      this.loading = true;
+      // this.currency = await this.$store.dispatch("fetchCurrency");
+      setTimeout(() => {
+        this.currency = { USD: 1.21995, PLN: 4.483998, EUR: 1 };
+        this.loading = false;
+      }, 500);
+    },
   },
 });
 </script>

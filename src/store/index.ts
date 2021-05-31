@@ -20,8 +20,14 @@ export default createStore({
     },
   },
   actions: {
-    fetchCurrency() {
+    async fetchCurrency() {
       const key = process.env.VUE_APP_FIXER;
+      const url = `http://data.fixer.io/api/latest?access_key=${key}&symbols=USD,PLN,EUR`;
+      // const response = await fetch(url);
+
+      // const result = await response.json();
+
+      // return result;
     },
   },
   modules: { auth, info },

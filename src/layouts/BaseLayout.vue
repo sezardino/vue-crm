@@ -1,5 +1,6 @@
 <template>
-  <div class="app-main-layout">
+  <Loader v-if="loading" />
+  <div v-else class="app-main-layout">
     <navbar @toggleSidebar="sidebarVisibility = !sidebarVisibility"></navbar>
 
     <sidebar v-model:isOpen="sidebarVisibility"></sidebar>
@@ -28,13 +29,15 @@ export default defineComponent({
   data() {
     return {
       sidebarVisibility: true,
+      loading: true,
     };
   },
   async mounted() {
     if (!Object.keys(this.$store.getters.info).length) {
       await this.$store.dispatch("fetchData");
-      console.log(this.$store.getters.info);
     }
+
+    this.loading = false;
   },
   methods: {},
 });
