@@ -36,7 +36,13 @@ export default defineComponent({
   async mounted() {
     // this.currency = await this.$store.dispatch("fetchCurrency");
     setTimeout(() => {
-      this.currency = { USD: 1.21995, PLN: 4.483998, EUR: 1 };
+      this.currency = {
+        success: true,
+        timestamp: 1622468584,
+        base: "EUR",
+        date: "2021-05-31",
+        rates: { USD: 1.21995, PLN: 4.483998, EUR: 1 },
+      };
       this.loading = false;
     }, 500);
   },
@@ -45,7 +51,13 @@ export default defineComponent({
       this.loading = true;
       // this.currency = await this.$store.dispatch("fetchCurrency");
       setTimeout(() => {
-        this.currency = { USD: 1.21995, PLN: 4.483998, EUR: 1 };
+        this.currency = {
+          success: true,
+          timestamp: 1622468584,
+          base: "EUR",
+          date: "2021-05-31",
+          rates: { USD: 1.21995, PLN: 4.483998, EUR: 1 },
+        };
         this.loading = false;
       }, 500);
     },

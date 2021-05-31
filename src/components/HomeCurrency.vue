@@ -14,8 +14,8 @@
         </thead>
 
         <tbody>
-          <tr>
-            <td>usd</td>
+          <tr v-for="rate in rates" :key="rate">
+            <td>rate</td>
             <td>12121</td>
             <td>12.12.12</td>
           </tr>
@@ -24,3 +24,10 @@
     </div>
   </div>
 </template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+export default defineComponent({
+  props: ["rates", "date"],
+});
+</script>
