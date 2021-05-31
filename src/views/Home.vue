@@ -8,45 +8,34 @@
       </button>
     </div>
 
-    <div class="row">
-      <div class="col s12 m6 l4">
-        <div class="card light-blue bill-card">
-          <div class="card-content white-text">
-            <span class="card-title">Score in </span>
+    <Loader v-if="loading" />
 
-            <p class="currency-line">
-              <span>12.0 Р</span>
-            </p>
-          </div>
-        </div>
-      </div>
+    <div v-else class="row">
+      <HomeBill />
 
       <div class="col s12 m6 l8">
-        <div class="card orange darken-3 bill-card">
-          <div class="card-content white-text">
-            <div class="card-header">
-              <span class="card-title">Exchange rate</span>
-            </div>
-            <table>
-              <thead>
-                <tr>
-                  <th>Currency</th>
-                  <th>Rate</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td>usd</td>
-                  <td>12121</td>
-                  <td>12.12.12</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <HomeCurrency />
       </div>
     </div>
   </div>
 </template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import HomeBill from "../components/HomeBill.vue";
+import HomeCurrency from "../components/HomeCurrency.vue";
+export default defineComponent({
+  name: "home",
+  components: { HomeBill, HomeCurrency },
+  data() {
+    return {
+      loading: true,
+      currency: null,
+    };
+  },
+  async mounted() {
+    await this.$store.dispatch("fetchCurrency");
+    this.loading = false;
+  },
+});
+</script>
