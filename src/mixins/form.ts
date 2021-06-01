@@ -76,6 +76,7 @@ export default {
         isValid = false;
         this.validate.name = validateMessages.name.invalid;
       } else if (value.length < 3) {
+        isValid = false;
         this.validate.name = validateMessages.name.short;
       }
       return isValid;
@@ -98,7 +99,6 @@ export default {
       const check = inputs.map((input) => {
         let isValid = true;
         const name = input.name;
-
         switch (name) {
           case "email":
             isValid = this.checkEmail(input.value);
@@ -119,7 +119,6 @@ export default {
 
         return isValid;
       });
-
       return !check.includes(false);
     },
   },
