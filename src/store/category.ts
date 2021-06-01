@@ -8,29 +8,38 @@ type categoryData = {
 
 export default {
   actions: {
+    async getCategories({ dispatch, commit }) {
+      const id = await dispatch("getUserId");
+      const categoriesData = await firebase
+        .database()
+        .ref(`users/${id}/categories`)
+        .once("value");
+      const categories = categoriesData.val();
+
+      const formattedCategories = Object.keys(categories).map((item) => ({
+        id: item,
+        ...categories[item],
+      }));
+
+      return formattedCategories;
+    },
+
     async createCategory({ dispatch, commit }, { name, limit }) {
       try {
         const id = await dispatch("getUserId");
         let available = true;
         const categories = firebase.database().ref(`/users/${id}/categories`);
 
-        await categories.get().then((snapshot) => {
-          if (snapshot.exists()) {
-            const values = Object.values(snapshot.val()).find(
-              (item: categoryData) => item.name === name
-            );
-            available = values ? false : true;
-          }
-        });
+        const values = (await dispatch("getCategories")).find(
+          (category) => category.name === name
+        );
+        available = values ? false : true;
 
         if (!available) {
           throw new Error(messages.categoryName);
         }
 
-        const category = await firebase
-          .database()
-          .ref(`/users/${id}/categories`)
-          .push({ name, limit });
+        const category = categories.push({ name, limit });
         return { name, limit, id: category.key };
       } catch (error) {
         commit("setError", error);
