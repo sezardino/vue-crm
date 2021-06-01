@@ -14,7 +14,7 @@ export default {
         .database()
         .ref(`users/${id}/categories`)
         .once("value");
-      const categories = categoriesData.val();
+      const categories = categoriesData.val() || {};
 
       const formattedCategories = Object.keys(categories).map((item) => ({
         id: item,
