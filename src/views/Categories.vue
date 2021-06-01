@@ -5,66 +5,21 @@
     </div>
     <section>
       <div class="row">
-        <div class="col s12 m6">
-          <div>
-            <div class="page-subtitle">
-              <h4>Create</h4>
-            </div>
+        <CategoriesCreate />
 
-            <form>
-              <div class="input-field">
-                <input id="name" type="text" />
-                <label for="name">Name</label>
-                <span class="helper-text invalid">Enter name</span>
-              </div>
-
-              <div class="input-field">
-                <input id="limit" type="number" />
-                <label for="limit">Limit</label>
-                <span class="helper-text invalid">Minimal value</span>
-              </div>
-
-              <button class="btn waves-effect waves-light" type="submit">
-                Create
-                <i class="material-icons right">send</i>
-              </button>
-            </form>
-          </div>
-        </div>
-        <div class="col s12 m6">
-          <div>
-            <div class="page-subtitle">
-              <h4>Edit</h4>
-            </div>
-
-            <form>
-              <div class="input-field">
-                <select>
-                  <option>Category</option>
-                </select>
-                <label>Choose Category</label>
-              </div>
-
-              <div class="input-field">
-                <input type="text" id="name" />
-                <label for="name">Name</label>
-                <span class="helper-text invalid">TITLE</span>
-              </div>
-
-              <div class="input-field">
-                <input id="limit" type="number" />
-                <label for="limit">Limit</label>
-                <span class="helper-text invalid">LIMIT</span>
-              </div>
-
-              <button class="btn waves-effect waves-light" type="submit">
-                Refresh
-                <i class="material-icons right">send</i>
-              </button>
-            </form>
-          </div>
-        </div>
+        <CategoriesEdit />
       </div>
     </section>
   </div>
 </template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import CategoriesCreate from "@/components/CategoriesCreate.vue";
+import CategoriesEdit from "@/components/CategoriesEdit.vue";
+
+export default defineComponent({
+  name: "categories",
+  components: { CategoriesCreate, CategoriesEdit },
+});
+</script>
