@@ -71,8 +71,7 @@ export default defineComponent({
         this.$router.push("/");
         this.formData = {};
       } catch (error) {
-        console.log(error);
-        // this.$error(messages[error.code] || "Some Error");
+        this.$error(messages[error.code] || "Some Error");
       }
     },
   },
