@@ -17,6 +17,9 @@ export default defineComponent({
     layout() {
       return this.$route.meta.layout + "-layout";
     },
+    error() {
+      return this.$store.getters.error;
+    },
   },
   mounted() {
     const message = this.$route.query.message;
@@ -24,6 +27,11 @@ export default defineComponent({
     if (message) {
       this.$message(messages[message]);
     }
+  },
+  watch: {
+    error(error) {
+      this.$error(error);
+    },
   },
 });
 </script>
