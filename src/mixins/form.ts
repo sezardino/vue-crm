@@ -31,7 +31,7 @@ export default {
       const value = +input.value;
       const min = +input.min;
       if (value < min) {
-        this.validate.email = validateMessages.limit.min(min);
+        this.validate.limit = validateMessages.limit.min(min);
         isValid = false;
       }
 
