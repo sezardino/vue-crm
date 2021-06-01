@@ -48,8 +48,10 @@
 import { defineComponent } from "vue";
 import { updateTextFields } from "materialize-css";
 import formMixin from "../mixins/form";
+import messages from "@/utils/messages";
 
 export default defineComponent({
+  emits: ["addCategory"],
   mixins: [formMixin],
   data() {
     return {
@@ -57,14 +59,31 @@ export default defineComponent({
     };
   },
   methods: {
-    submitHandler(evt) {
+    async submitHandler(evt) {
       const isValid = this.checkValid(evt.target);
 
       if (!isValid) {
         return;
       }
-      console.log(1);
+
+      try {
+        const result = await this.$store.dispatch(
+          "createCategory",
+          this.formData
+        );
+
+        if (result) {
+          this.$emit("addCategory", result);
+          this.$message(messages.categoryCreated);
+          this.formData = {};
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
+  },
+  mounted() {
+    updateTextFields();
   },
 });
 </script>
