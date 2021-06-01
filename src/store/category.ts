@@ -26,10 +26,7 @@ export default {
 
     async createCategory({ dispatch, commit }, { name, limit }) {
       try {
-        const id = await dispatch("getUserId");
         let available = true;
-        const categories = firebase.database().ref(`/users/${id}/categories`);
-
         const values = (await dispatch("getCategories")).find(
           (category) => category.name === name
         );
@@ -39,8 +36,22 @@ export default {
           throw new Error(messages.categoryName);
         }
 
+        const id = await dispatch("getUserId");
+        const categories = firebase.database().ref(`/users/${id}/categories`);
         const category = categories.push({ name, limit });
         return { name, limit, id: category.key };
+      } catch (error) {
+        commit("setError", error);
+      }
+    },
+    async updateCategory({ dispatch, commit }, { id, name, limit }) {
+      try {
+        const userId = await dispatch("getUserId");
+        await firebase
+          .database()
+          .ref(`/users/${userId}/categories`)
+          .child(id)
+          .update({ name, limit });
       } catch (error) {
         commit("setError", error);
       }
