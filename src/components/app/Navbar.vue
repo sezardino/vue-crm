@@ -5,7 +5,7 @@
         <a href="#" @click="$emit('toggleSidebar')">
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">{{ formatedDate }}</span>
+        <span class="black-text">{{ formatDate(date, "datetime") }}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">
@@ -42,9 +42,11 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { Dropdown } from "materialize-css/dist/js/materialize.min";
+import dataMixin from "@/mixins/data";
 
 export default defineComponent({
   emits: ["toggleSidebar"],
+  mixins: [dataMixin],
   data() {
     return {
       date: new Date(),
@@ -69,17 +71,6 @@ export default defineComponent({
   },
 
   computed: {
-    formatedDate(): string {
-      const options = {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-      };
-      return new Intl.DateTimeFormat("pl-Pl", options).format(this.date);
-    },
     name() {
       return this.$store.getters.info.name;
     },

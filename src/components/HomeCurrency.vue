@@ -17,7 +17,7 @@
           <tr v-for="(rate, name) in rates" :key="rate">
             <td>{{ name }}</td>
             <td>{{ rate }}</td>
-            <td>{{ date }}</td>
+            <td>{{ formatDate(date) }}</td>
           </tr>
         </tbody>
       </table>
@@ -27,7 +27,10 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import dateMixin from "@/mixins/data";
+
 export default defineComponent({
+  mixins: [dateMixin],
   props: ["rates", "date"],
 });
 </script>
