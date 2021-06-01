@@ -7,5 +7,7 @@ export default {
   "auth/user-not-found":
     "There is no user record corresponding to this identifier. The user may have been deleted.",
   categoryCreated: "Category was created",
-  categoryName: "This name was already in use",
+  categoryName: "This name is already in use",
+  categoryNotExist: "This category are not exist",
+  categoryUpdate: 'Category successfully updated'
 };
