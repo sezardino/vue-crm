@@ -8,13 +8,13 @@
       <form @submit.prevent="submitHandler">
         <div class="input-field">
           <input
-            id="name"
+            id="create-name"
             type="text"
             name="name"
             v-model="formData.name"
             :class="{ invalid: !!validate.name }"
           />
-          <label for="name">Name</label>
+          <label for="create-name">Name</label>
           <span class="helper-text invalid" v-if="validate.name">{{
             validate.name
           }}</span>
@@ -22,14 +22,14 @@
 
         <div class="input-field">
           <input
-            id="limit"
+            id="create-limit"
             type="number"
             name="limit"
             min="1"
             v-model="formData.limit"
             :class="{ invalid: !!validate.limit }"
           />
-          <label for="limit">Limit</label>
+          <label for="create-limit">Limit</label>
           <span class="helper-text invalid" v-if="validate.limit">{{
             validate.limit
           }}</span>
