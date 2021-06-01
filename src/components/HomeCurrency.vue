@@ -14,10 +14,10 @@
         </thead>
 
         <tbody>
-          <tr v-for="rate in rates" :key="rate">
-            <td>rate</td>
-            <td>12121</td>
-            <td>12.12.12</td>
+          <tr v-for="(rate, name) in rates" :key="rate">
+            <td>{{ name }}</td>
+            <td>{{ rate }}</td>
+            <td>{{ date }}</td>
           </tr>
         </tbody>
       </table>
