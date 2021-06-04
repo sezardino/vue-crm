@@ -8,6 +8,9 @@ const selectMixin = {
   },
 
   methods: {
+    createSelect() {
+      this.select = new FormSelect(this.$refs.select);
+    },
     destroySelect() {
       this.select.destroy();
       this.select = null;
@@ -15,12 +18,15 @@ const selectMixin = {
   },
 
   mounted() {
-    setTimeout(() => (this.select = new FormSelect(this.$refs.select)), 0);
+    if (this.$refs.select) {
+      setTimeout(() => this.createSelect(), 0);
+    }
   },
 
   beforeUnmount() {
-    console.log(1);
-    this.destroySelect();
+    if (this.select) {
+      this.destroySelect();
+    }
   },
 };
 
