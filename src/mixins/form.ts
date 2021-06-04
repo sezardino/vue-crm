@@ -13,6 +13,8 @@ const validateMessages = {
   },
   name: { invalid: "Invalid Name", short: "Name is too short" },
   agree: { disagree: "You should agree with us" },
+  amount: { zero: "Amount should be higher of lower then 0" },
+  description: { empty: "Description shouldn't be empty" },
 };
 
 export default {
@@ -24,6 +26,30 @@ export default {
   methods: {
     clearValidateMessage() {
       this.validate = {};
+    },
+
+    checkAmount(input: HTMLInputElement) {
+      let isValid = true;
+      const value = +input.value;
+
+      if (value === 0) {
+        this.validate.amount = validateMessages.amount.zero;
+        isValid = false;
+      }
+
+      return isValid;
+    },
+
+    checkDescription(input: HTMLInputElement) {
+      let isValid = true;
+      const value = input.value;
+
+      if (value.length === 0) {
+        this.validate.description = validateMessages.description.empty;
+        isValid = false;
+      }
+
+      return isValid;
     },
 
     checkLimit(input: HTMLInputElement) {
@@ -114,6 +140,12 @@ export default {
             break;
           case "limit":
             isValid = this.checkLimit(input);
+            break;
+          case "amount":
+            isValid = this.checkAmount(input);
+            break;
+          case "description":
+            isValid = this.checkDescription(input);
             break;
         }
 
