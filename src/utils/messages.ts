@@ -9,5 +9,8 @@ export default {
   categoryCreated: "Category was created",
   categoryName: "This name is already in use",
   categoryNotExist: "This category are not exist",
-  categoryUpdate: 'Category successfully updated'
+  categoryUpdate: "Category successfully updated",
+  recordAdd: "Record added successfully",
+  recordNotEnough: (amount) =>
+    `Bill should be lower than 0, not enough ${amount} zl`,
 };
