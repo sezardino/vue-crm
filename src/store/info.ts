@@ -21,6 +21,20 @@ export default {
         .once("value");
       commit("setInfo", info.val());
     },
+
+    async updateInfo({ dispatch, commit, getters }, toUpdate) {
+      try {
+        const userId = await dispatch("getUserId");
+        const updateData = { ...getters.info, ...toUpdate };
+        await firebase
+          .database()
+          .ref(`/users/${userId}/info`)
+          .update(updateData);
+        commit("setInfo", updateData);
+      } catch (error) {
+        commit("setError", error);
+      }
+    },
   },
   getters: {
     info: (state) => state.info,
