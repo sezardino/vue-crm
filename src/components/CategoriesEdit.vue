@@ -96,9 +96,11 @@ export default defineComponent({
       this.select = null;
     },
   },
+
   mounted() {
-    this.select = new FormSelect(this.$refs.select);
+    setTimeout(() => (this.select = new FormSelect(this.$refs.select)), 0);
   },
+
   watch: {
     current() {
       const { id, name, limit } = this.categories.find(
@@ -107,11 +109,8 @@ export default defineComponent({
       this.formData.name = name;
       this.formData.limit = limit;
     },
-    categories() {
-      this.destroySelect();
-      setTimeout(() => (this.select = new FormSelect(this.$refs.select)), 400);
-    },
   },
+
   updated() {
     updateTextFields();
   },
