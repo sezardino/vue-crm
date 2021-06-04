@@ -138,6 +138,7 @@ export default defineComponent({
         type: type,
         amount: amount,
         description: description,
+        date: new Date().toJSON(),
       });
 
       let newBill = type === "income" ? bill + amount : bill - amount;

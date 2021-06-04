@@ -4,7 +4,7 @@ const record = {
   actions: {
     async createRecord(
       { dispatch, commit },
-      { categoryId, amount, description, type }
+      { categoryId, amount, description, type, date }
     ) {
       const userId = await dispatch("getUserId");
       firebase.database().ref(`users/${userId}/records`);
@@ -12,7 +12,7 @@ const record = {
       try {
         const id = await dispatch("getUserId");
         const records = firebase.database().ref(`/users/${id}/records`);
-        records.push({ amount, description, type, categoryId });
+        records.push({ amount, description, type, categoryId, date });
       } catch (error) {
         commit("setError", error);
         throw new Error(error);
