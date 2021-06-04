@@ -7,7 +7,7 @@
 
       <form @submit.prevent="submitHandler">
         <div class="input-field">
-          <select name="category" ref="select" v-model="current">
+          <select name="category" ref="select" v-model="currentCategory">
             <option
               v-for="category in categories"
               :key="category.id"
@@ -71,7 +71,7 @@ export default defineComponent({
   data() {
     return {
       formData: {},
-      current: null,
+      currentCategory: null,
       select: null,
     };
   },
@@ -90,15 +90,24 @@ export default defineComponent({
       this.$message(messages.categoryUpdate);
       this.$emit("updateCategory", newCategory);
     },
-  },
 
-  watch: {
-    current() {
-      const { id, name, limit } = this.categories.find(
-        (category) => category.id === this.current
+    changeCategory() {
+      const { name, limit } = this.categories.find(
+        (category) => category.id === this.currentCategory
       );
       this.formData.name = name;
       this.formData.limit = limit;
+    },
+  },
+
+  mounted() {
+    this.currentCategory = this.categories[0].id;
+    this.changeCategory();
+  },
+
+  watch: {
+    currentCategory() {
+      this.changeCategory();
     },
   },
 
