@@ -60,14 +60,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { updateTextFields } from "materialize-css";
-import { FormSelect } from "materialize-css";
 import formMixin from "@/mixins/form";
+import selectMixin from "@/mixins/select";
 import messages from "@/utils/messages";
 
 export default defineComponent({
   props: ["categories"],
   emits: ["updateCategory"],
-  mixins: [formMixin],
+  mixins: [formMixin, selectMixin],
   data() {
     return {
       formData: {},
@@ -90,15 +90,6 @@ export default defineComponent({
       this.$message(messages.categoryUpdate);
       this.$emit("updateCategory", newCategory);
     },
-
-    destroySelect() {
-      this.select.destroy();
-      this.select = null;
-    },
-  },
-
-  mounted() {
-    setTimeout(() => (this.select = new FormSelect(this.$refs.select)), 0);
   },
 
   watch: {
