@@ -5,7 +5,9 @@
         <span class="card-title">Score in </span>
 
         <p class="currency-line" v-for="currency in currencies" :key="currency">
-          <span>{{ getCurrency(currency) }}</span>
+          <span
+            v-format:[currency].currency="Math.floor(base * rates[currency])"
+          ></span>
         </p>
       </div>
     </div>
@@ -26,19 +28,6 @@ export default defineComponent({
       return Math.floor(
         this.$store.getters.info.bill / (this.rates.PLN / this.rates.EUR)
       );
-    },
-  },
-  methods: {
-    getCurrency(currency) {
-      const value = Math.floor(this.base * this.rates[currency]);
-      return this.formatCurrency(value, currency);
-    },
-
-    formatCurrency(value, currency = "PLN") {
-      return new Intl.NumberFormat("pl-PL", {
-        style: "currency",
-        currency,
-      }).format(value);
     },
   },
 });

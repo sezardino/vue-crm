@@ -5,7 +5,7 @@
         <a href="#" @click="$emit('toggleSidebar')">
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">{{ formatDate(date, "datetime") }}</span>
+        <span class="black-text" v-format:datetime.date="date"></span>
       </div>
 
       <ul class="right hide-on-small-and-down">

@@ -16,8 +16,8 @@
         <tbody>
           <tr v-for="(rate, name) in rates" :key="rate">
             <td>{{ name }}</td>
-            <td>{{ rate }}</td>
-            <td>{{ formatDate(date) }}</td>
+            <td v-format:[name].currency="rate"></td>
+            <td v-format:date.date="date"></td>
           </tr>
         </tbody>
       </table>
@@ -32,5 +32,8 @@ import dateMixin from "@/mixins/data";
 export default defineComponent({
   mixins: [dateMixin],
   props: ["rates", "date"],
+  mounted() {
+    console.log(this.rates);
+  },
 });
 </script>

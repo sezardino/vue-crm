@@ -8,6 +8,7 @@ import "materialize-css/dist/js/materialize.min";
 import "./assets/index.css";
 import messagePlugin from "./utils/message";
 import Loader from "./components/app/Loader.vue";
+import formatDirective from "@/directives/format";
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -32,6 +33,7 @@ firebase.auth().onAuthStateChanged(() => {
     app.use(store);
     app.use(router);
     app.use(messagePlugin);
+    app.directive("format", formatDirective);
     app.mount("#app");
   }
 });
