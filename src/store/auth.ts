@@ -11,9 +11,9 @@ export default {
       }
     },
 
-    async logout({ dispatch }) {
+    async logout({ dispatch, commit }) {
       await firebase.auth().signOut();
-      await dispatch("clearInfo");
+      await commit("clearInfo");
     },
 
     async register({ dispatch, commit }, { email, password, name }) {
