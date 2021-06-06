@@ -18,6 +18,21 @@ const record = {
         throw new Error(error);
       }
     },
+    async getRecords({ dispatch, commit }) {
+      const id = await dispatch("getUserId");
+      const recordsData = await firebase
+        .database()
+        .ref(`users/${id}/records`)
+        .once("value");
+      const records = recordsData.val() || {};
+
+      const formattedRecords = Object.keys(records).map((item) => ({
+        id: item,
+        ...records[item],
+      }));
+
+      return formattedRecords;
+    },
   },
 };
 

@@ -32,8 +32,5 @@ import dateMixin from "@/mixins/data";
 export default defineComponent({
   mixins: [dateMixin],
   props: ["rates", "date"],
-  mounted() {
-    console.log(this.rates);
-  },
 });
 </script>
