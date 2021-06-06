@@ -9,6 +9,7 @@ import "./assets/index.css";
 import messagePlugin from "./utils/message";
 import Loader from "./components/app/Loader.vue";
 import formatDirective from "@/directives/format";
+import tooltipDirective from "@/directives/tooltip";
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -34,6 +35,7 @@ firebase.auth().onAuthStateChanged(() => {
     app.use(router);
     app.use(messagePlugin);
     app.directive("format", formatDirective);
+    app.directive("tooltip", tooltipDirective);
     app.mount("#app");
   }
 });
