@@ -33,6 +33,18 @@ const record = {
 
       return formattedRecords;
     },
+
+    async getRecordById({ dispatch, commit }, id) {
+      const userId = await dispatch("getUserId");
+      const recordData = await firebase
+        .database()
+        .ref(`users/${userId}/records`)
+        .child(id)
+        .once("value");
+      const record = recordData.val() || {};
+
+      return { ...record, id };
+    },
   },
 };
 

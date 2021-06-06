@@ -24,6 +24,18 @@ export default {
       return formattedCategories;
     },
 
+    async getCategoryById({ dispatch, commit }, id) {
+      const userId = await dispatch("getUserId");
+      const categoryData = await firebase
+        .database()
+        .ref(`users/${userId}/categories`)
+        .child(id)
+        .once("value");
+      const category = categoryData.val() || {};
+
+      return { ...category, id };
+    },
+
     async createCategory({ dispatch, commit }, { name, limit }) {
       try {
         let available = true;
