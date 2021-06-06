@@ -8,36 +8,43 @@
       <canvas></canvas>
     </div>
 
-    <section>
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Amount</th>
-            <th>Date</th>
-            <th>Category</th>
-            <th>Type</th>
-            <th>Open</th>
-          </tr>
-        </thead>
+    <Loader v-if="loading" />
 
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>1212</td>
-            <td>12.12.32</td>
-            <td>name</td>
-            <td>
-              <span class="white-text badge red">Expense</span>
-            </td>
-            <td>
-              <button class="btn-small btn">
-                <i class="material-icons">open_in_new</i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <p class="center" v-else-if="!records.length">
+      The are no records.
+      <router-link to="/record">Create new record</router-link>
+    </p>
+
+    <section v-else>
+      <HistoryTable :records="records" />
     </section>
   </div>
 </template>
+
+<script lang="ts">
+import HistoryTable from "@/components/HistoryTable.vue";
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  components: { HistoryTable },
+  data() {
+    return { loading: true, categories: [], records: [] };
+  },
+  async mounted() {
+    const records = await this.$store.dispatch("getRecords");
+    this.categories = await this.$store.dispatch("getCategories");
+    this.records = records.map((record) => {
+      return {
+        ...record,
+        typeClass: record.type === "income" ? "green" : "red",
+        typeText: record.type === "income" ? "Income" : "Outcome",
+        category: this.categories.find(
+          (category) => (category.id = record.categoryId)
+        ).name,
+      };
+    });
+
+    this.loading = false;
+  },
+});
+</script>
