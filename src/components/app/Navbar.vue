@@ -42,11 +42,9 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { Dropdown } from "materialize-css/dist/js/materialize.min";
-import dataMixin from "@/mixins/data";
 
 export default defineComponent({
   emits: ["toggleSidebar"],
-  mixins: [dataMixin],
   data() {
     return {
       date: new Date(),

@@ -41,7 +41,7 @@ export default defineComponent({
       "getCategoryById",
       record.categoryId
     );
-    console.log(category);
+
     this.record = {
       ...record,
       category: category.name,

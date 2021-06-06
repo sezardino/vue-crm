@@ -27,10 +27,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import dateMixin from "@/mixins/data";
 
 export default defineComponent({
-  mixins: [dateMixin],
   props: ["rates", "date"],
 });
 </script>

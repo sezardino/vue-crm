@@ -16,7 +16,7 @@ import messagePlugin from "./utils/message";
 
 //components
 import Loader from "./components/app/Loader.vue";
-import Paginate from "vuejs-paginate";
+import Paginate from "./components/app/Paginate.vue";
 
 //directives
 import formatDirective from "@/directives/format";
