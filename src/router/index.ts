@@ -42,7 +42,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/details/:id",
     name: "Record details",
     meta: { layout: "base", auth: true },
-    component: () => import("../views/Records.vue"),
+    component: () => import("../views/Details.vue"),
   },
   {
     path: "/login",
