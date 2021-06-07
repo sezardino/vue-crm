@@ -13,4 +13,5 @@ export default {
   recordAdd: "Record added successfully",
   recordNotEnough: (amount) =>
     `Bill should be lower than 0, not enough ${amount} zl`,
+  profileNameUpdate: "Users name updated successfully",
 };
