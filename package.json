@@ -8,6 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@j-t-mcc/vue3-chartjs": "^1.1.2",
+    "chart.js": "^3.3.2",
     "core-js": "^3.6.5",
     "firebase": "^8.6.3",
     "materialize-css": "^1.0.0-rc.2",
